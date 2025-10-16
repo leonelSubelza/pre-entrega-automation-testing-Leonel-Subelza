@@ -18,7 +18,7 @@ def login(driver,username,password):
   
   # Espera a que la nueva página cargue
   wait = WebDriverWait(driver, 10)
-  wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'inventory_item')))
+  wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'app_logo')))
   
   
   #Navegación y Verificación del Catálogo: (Clases 6 a 8)
