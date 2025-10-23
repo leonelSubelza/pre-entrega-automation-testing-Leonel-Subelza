@@ -2,13 +2,10 @@ from selenium import webdriver          #Importamos la librería que permite con
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from utils.saucedemo import login
 
-driver = webdriver.Chrome()
-
-def test_browsing():
+def test_browsing(login_in_driver):
   try:
-    login(driver,'standard_user','secret_sauce')
+    driver = login_in_driver
     
     # validar titulo
     products_txt = driver.find_element(By.CSS_SELECTOR, '[data-test="title"]')
@@ -24,8 +21,6 @@ def test_browsing():
     assert driver.find_element(By.ID,'react-burger-menu-btn'), "Botón menú no encontrado"
     assert driver.find_element(By.CSS_SELECTOR, '[data-test="product-sort-container"]'), "Filtro no encontrado"
     assert driver.find_element(By.CSS_SELECTOR, '[data-test="shopping-cart-link"]'), "Carrito no encontrado"
-    
-    
-    
-  finally:
-    driver.quit()
+  except Exception as e:
+    print(f"Error en test_browsing: {e}")
+    raise

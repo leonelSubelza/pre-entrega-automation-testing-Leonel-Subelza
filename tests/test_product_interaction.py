@@ -2,13 +2,13 @@ from selenium import webdriver          #Importamos la librería que permite con
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from utils.saucedemo import login
 
-driver = webdriver.Chrome()
+# driver = webdriver.Chrome()
 
-def test_add_product_to_cart():
+def test_add_product_to_cart(login_in_driver):
   try:
-    login(driver,'standard_user','secret_sauce')
+    driver = login_in_driver
+    # login(driver,'standard_user','secret_sauce')
     
     cart_btn = driver.find_element(By.CSS_SELECTOR,'[data-test="shopping-cart-link"]')
     
@@ -24,5 +24,6 @@ def test_add_product_to_cart():
     # verificar que hay un elemento en el carrito
     cart_btn.click()
     assert driver.find_element(By.CSS_SELECTOR, '[data-test="inventory-item"]'), "No hay elemento en carrito"
-  finally:
-    driver.quit()
+  except Exception as e:
+    print(f"Error en test_product_interaction: {e}")
+    raise

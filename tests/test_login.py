@@ -3,11 +3,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-driver = webdriver.Chrome()
+# driver = webdriver.Chrome()
 
-def test_valid_login():
+def test_valid_login(driver):
   try:
     # driver.implicitly_wait(5)
+    # driver = login_in_driver
     driver.get('https://www.saucedemo.com')
     
     #Automatización de Login:
@@ -24,5 +25,6 @@ def test_valid_login():
     #Navegación y Verificación del Catálogo: (Clases 6 a 8)
     assert '/inventory.html' in driver.current_url, f"URL inesperada: {driver.current_url}"
     assert driver.title == 'Swag Labs'
-  finally:
-    driver.quit()
+  except Exception as e:
+    print(f"Error en test_login: {e}")
+    raise
