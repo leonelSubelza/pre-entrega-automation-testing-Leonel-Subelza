@@ -7,6 +7,10 @@ def test_browsing(login_in_driver):
   try:
     driver = login_in_driver
     
+    # Espera explícita para garantizar que los productos existen
+    wait = WebDriverWait(driver, 10)
+    wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[data-test="inventory-item"]')))
+    
     # validar titulo
     products_txt = driver.find_element(By.CSS_SELECTOR, '[data-test="title"]')
     assert "Products" in products_txt.text
